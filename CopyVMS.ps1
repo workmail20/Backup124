@@ -1,4 +1,5 @@
 
+
 $SourcePaths = @(
     "C:\\A\\",
     "F:\\A_part2\\",
@@ -23,6 +24,7 @@ do {
     $RateLimit = Read-Host "Enter I/O limit in MB/s [default: 50m]"
     
     if ($RateLimit -eq "") {
+        $RateLimit = "50";
         Write-Host "Set default 50MB/s" -ForegroundColor Green
         break
     } else {
@@ -37,12 +39,12 @@ do {
     $OverwriteChoice = $OverwriteChoice.ToLower()
 
     if ($OverwriteChoice -eq "yes") {
-        $RobocopyFlags = "/mir /V /is /it /R:4 /W:5 /iorate:$($RateLimit)m /log+:log.txt /tee /unicode"
+        $RobocopyFlags = "/e /V /is /it /R:4 /W:5 /iorate:$($RateLimit)m /log+:log.txt /tee /unicode"
         Write-Host "Selected full mirror (rewrite accepted)." -ForegroundColor Green
         break
     }
     elseif ($OverwriteChoice -eq "no") {
-        $RobocopyFlags = "/MIR /V /R:4 /W:5 /iorate:$($RateLimit)m /log+:log.txt /tee /unicode"
+        $RobocopyFlags = "/e /V /R:4 /W:5 /iorate:$($RateLimit)m /log+:log.txt /tee /unicode"
         Write-Host "Selected copy without rewrite." -ForegroundColor Yellow
         break
     }
